@@ -1,4 +1,7 @@
-using ApiWebApi.Data;
+﻿using ApiWebApi.Data;
+using ApiWebApi.GenericRepositoris.Interfaces;
+using ApiWebApi.GenericRepositoris.Repositories;
+using ApiWebApi.GenericRepositoris.Servises;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -11,6 +14,34 @@ var strConnection = builder.Configuration.GetConnectionString("DefaultConnection
 builder.Services.AddDbContext<ApiWebContext>(options =>
     options.UseSqlite(strConnection)
 );
+
+
+/* =================================================================================================
+   Configurazione Dependency Injection (Scoped)
+
+   - IGenericRepository<> → ogni entità che richiede un repository riceverà 
+     un’istanza dedicata di GenericRepository<T> valida per la durata della richiesta HTTP.
+
+   - StudentiService → per ogni richiesta HTTP viene creata una nuova istanza 
+     che utilizza a sua volta il repository corrispondente.
+   ================================================================================================ */
+
+
+/* ======================================================================================================
+ * Registra nel container di Dependency Injection il repository generico.                                =
+ * typeof(IGenericRepository<>) indica un'interfaccia generica aperta (senza tipo specifico).            =
+ * typeof(GenericRepository<>) è la sua implementazione concreta.                                        =
+ * AddScoped significa che ogni richiesta HTTP avrà la propria istanza del repository.                   =
+ * In pratica: quando inietti IGenericRepository<Studenti>, verrà fornito un GenericRepository<Studenti>.*/
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+/* ================================================================================================
+ * Registra il servizio StudentiService come "scoped".                                            =
+ * AddScoped<StudentiService>() equivale a dire:                                                  =
+ * ogni volta che qualcuno chiede uno StudentiService (nel costruttore di un controller o altro), =
+ * il container creerà un'istanza e la manterrà per tutta la durata della singola richiesta HTTP. =
+ * Non serve passare l'interfaccia se la classe non ne implementa una: usi direttamente la classe.*/
+builder.Services.AddScoped<StudentiService>();
 
 
 // Configurazione dei servizi di CORS  (Da Non Toccare)
@@ -33,10 +64,10 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Corso di Programmazione C# � Talentform SpA 2025",
+        Title = "Corso di Programmazione C# © Talentform SpA 2025",
         Version = "v1",
         Description = "Documentazione API per il progetto ASP.NET Core con SQLite. " +
-                   "Questa documentazione � stata generata automaticamente utilizzando Swagger.\n " +
+                   "Questa documentazione è stata generata automaticamente utilizzando Swagger.\n " +
                    "Per ulteriori informazioni, contattare il docente Moussa.",
         Contact = new OpenApiContact
         {
