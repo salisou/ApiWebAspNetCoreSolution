@@ -1,0 +1,103 @@
+﻿# ============================================================
+#   Progetto ASP.NET Core con Entity Framework Core
+#   File ignorati dal controllo di versione Git
+#   Docente: Moussa
+# ============================================================
+
+# ============================================
+# Output della compilazione
+# ============================================
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# ============================================
+# Visual Studio / IDE
+# ============================================
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
+
+# ============================================
+# File temporanei e backup
+# ============================================
+*.bak
+*.tmp
+*.temp
+*.swp
+*.DS_Store
+Thumbs.db
+
+# ============================================
+# Pacchetti NuGet
+# ============================================
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+.nuget/
+
+# ============================================
+# Test & Coverage
+# ============================================
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# ============================================
+# Publish / build artifacts
+# ============================================
+project.lock.json
+project.fragment.lock.json
+artifacts/
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_Packages/
+_PublishedWebsites/
+
+# ============================================
+# JetBrains Rider
+# ============================================
+.idea/
+*.sln.iml
+
+# ============================================
+# Entity Framework Core
+# ============================================
+Migrations/
+
+# ============================================
+# File personalizzati da ignorare
+# ============================================
+DbScuola.db
+# appsettings.Development.json
+# appsettings.Local.json
+
+# ============================================
+# Node.js (se usi frontend nello stesso repo)
+# ============================================
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# ============================================
+# Sistema Operativo
+# ============================================
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# ============================================================
+#   Fine .gitignore
+#   Gestito dal Docente Moussa
+# ============================================================
