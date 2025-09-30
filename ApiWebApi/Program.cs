@@ -2,6 +2,7 @@
 using ApiWebApi.GenericRepositoris.Interfaces;
 using ApiWebApi.GenericRepositoris.Repositories;
 using ApiWebApi.GenericRepositoris.Servises;
+using ApiWebApi.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -42,6 +43,14 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
  * il container creerà un'istanza e la manterrà per tutta la durata della singola richiesta HTTP. =
  * Non serve passare l'interfaccia se la classe non ne implementa una: usi direttamente la classe.*/
 builder.Services.AddScoped<StudentiService>();
+
+/* =================================================================================================* 
+ *   AutoMapper Configuration                                                                      *
+ *   AutoMapper è una libreria che semplifica la mappatura tra oggetti di tipi diversi,            *
+ *   riducendo la necessità di scrivere codice di conversione manuale.                             *
+ *   Qui registriamo il profilo di mapping definito in MappingProfile.cs                           *
+ ================================================================================================== */
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
 // Configurazione dei servizi di CORS  (Da Non Toccare)
