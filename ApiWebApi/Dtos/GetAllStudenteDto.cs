@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ApiWebApi.Dtos
+﻿namespace ApiWebApi.Dtos
 {
-    public class StudentiDto
+    public class GetAllStudenteDto
     {
         public int IdStudente { get; set; }
-        [Required]
         public string Nome { get; set; }
-        [Required]
         public string Cognome { get; set; }
+        public int Eta { get; set; }
     }
 }

@@ -17,10 +17,10 @@
          * Task rappresenta un'operazione asincrona che può restituire un valore. In questo caso, viene utilizzato per operazioni asincrone che coinvolgono entità di tipo T.
          * Asinc indica che il metodo è asincrono, il che significa che può essere eseguito in modo non bloccante, consentendo al programma di continuare l'esecuzione mentre l'operazione è in corso.
          */
-        Task<IEnumerable<T>> GetAllAsinc(); // Recupera tutte le entità di tipo T in modo asincrono.
-        Task<T> GetByIdAsinc(int id); // Recupera un'entità di tipo T per ID in modo asincrono.
-        Task AddAsinc(T entity); // Aggiunge una nuova entità di tipo T in modo asincrono.
-        Task UpdateAsinc(T entity); // Aggiorna un'entità di tipo T esistente in modo asincrono.
-        Task DeleteAsinc(int id); // Elimina un'entità di tipo T per ID in modo asincrono.
+        Task<IEnumerable<T>> GetAllAsync(); // Recupera tutte le entità di tipo T in modo asincrono.
+        Task<T?> GetByIdAsync(int id); // Recupera un'entità di tipo T per ID in modo asincrono.
+        Task<T> CreateAsync(T entity); // Aggiunge una nuova entità di tipo T in modo asincrono.
+        Task<T?> UpdateAsync(int id, T entity); // Aggiorna un'entità di tipo T esistente in modo asincrono.
+        Task<bool> DeleteAsync(int id); // Elimina un'entità di tipo T per ID in modo asincrono.
     }
 }
