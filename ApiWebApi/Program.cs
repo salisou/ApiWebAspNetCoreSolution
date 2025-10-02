@@ -9,21 +9,24 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Configurazione di Serilog
 builder.Host.UseSerilog((ctx, lc) =>
 {
     lc.WriteTo.Console()
       .ReadFrom.Configuration(ctx.Configuration);
 });
+#endregion
 
-
-// Add services to the container.
+#region Configurazione di EF Core DbContext
 var strConnection = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 builder.Services.AddDbContext<ApiWebContext>(options =>
     options.UseSqlite(strConnection)
 );
+#endregion
 
+#region Dependency Injection
 
 /* =================================================================================================
    Configurazione Dependency Injection (Scoped)
@@ -35,14 +38,18 @@ builder.Services.AddDbContext<ApiWebContext>(options =>
      che utilizza a sua volta il repository corrispondente.
    ================================================================================================ */
 
-
 /* ======================================================================================================
  * Registra nel container di Dependency Injection il repository generico.                                =
  * typeof(IGenericRepository<>) indica un'interfaccia generica aperta (senza tipo specifico).            =
  * typeof(GenericRepository<>) è la sua implementazione concreta.                                        =
  * AddScoped significa che ogni richiesta HTTP avrà la propria istanza del repository.                   =
  * In pratica: quando inietti IGenericRepository<Studenti>, verrà fornito un GenericRepository<Studenti>.*/
+
+// Inject Interface and Repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+// Inject Repositories
+builder.Services.AddScoped(typeof(GenericRepository<>));
 
 /* ================================================================================================
  * Registra il servizio StudentiService come "scoped".                                            =
@@ -59,9 +66,9 @@ builder.Services.AddScoped<StudentiService>();
  *   Qui registriamo il profilo di mapping definito in MappingProfile.cs                           *
  ================================================================================================== */
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+#endregion
 
-
-// Configurazione dei servizi di CORS  (Da Non Toccare)
+#region Configurazione dei servizi di CORS  (Da Non Toccare)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -69,11 +76,12 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
+#endregion
 
 // Aggiunta dei controller
 builder.Services.AddControllers();
 
-// Configurazione di Swagger/OpenAPI
+#region Configurazione di Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 
 // Configurazione dettagliata di Swagger con informazioni personalizzate (Da Non Toccare)
@@ -94,9 +102,11 @@ builder.Services.AddSwaggerGen(c =>
     });
 
 });
+#endregion
 
 var app = builder.Build();
 
+#region Enable Swagger only in development
 // Middleware per Swagger solo in ambiente di sviluppo (Da Non Toccare)
 if (app.Environment.IsDevelopment())
 {
@@ -108,10 +118,8 @@ if (app.Environment.IsDevelopment())
         c.DocumentTitle = "Documentazione API - Docente Moussa";
         c.RoutePrefix = "swagger"; // oppure "" se vuoi che Swagger sia sulla root
     });
-
-
 }
-
+#endregion
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors("AllowAllOrigins");

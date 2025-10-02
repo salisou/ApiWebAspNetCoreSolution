@@ -1,5 +1,5 @@
 ﻿using ApiWebApi.Dtos;
-using ApiWebApi.GenericRepositoris.Interfaces;
+using ApiWebApi.GenericRepositoris.Repositories;
 using ApiWebApi.Models;
 using AutoMapper;
 
@@ -11,10 +11,10 @@ namespace ApiWebApi.GenericRepositoris.Servises
     /// </summary>
     public class StudentiService
     {
-        private readonly IGenericRepository<Studenti> _repository;
+        private readonly GenericRepository<Studenti> _repository;
         private readonly IMapper _mapper;
 
-        public StudentiService(IGenericRepository<Studenti> repository, IMapper mapper)
+        public StudentiService(GenericRepository<Studenti> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
