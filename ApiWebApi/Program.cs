@@ -5,8 +5,16 @@ using ApiWebApi.GenericRepositoris.Servises;
 using ApiWebApi.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, lc) =>
+{
+    lc.WriteTo.Console()
+      .ReadFrom.Configuration(ctx.Configuration);
+});
+
 
 // Add services to the container.
 var strConnection = builder.Configuration.GetConnectionString("DefaultConnection")

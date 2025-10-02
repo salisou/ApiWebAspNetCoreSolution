@@ -15,5 +15,6 @@ namespace ApiWebApi.Mappings
             CreateMap<Studenti, GetStudenteByIdDto>().ReverseMap();
             CreateMap<Studenti, DeleteStudenteDto>().ReverseMap();
         }
+
     }
 }
