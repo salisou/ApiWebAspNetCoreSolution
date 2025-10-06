@@ -1,4 +1,5 @@
-﻿using ApiWebApi.Dtos;
+﻿using ApiWebApi.Data;
+using ApiWebApi.Dtos.Studenti;
 using ApiWebApi.GenericRepositoris.Repositories;
 using ApiWebApi.Models;
 using AutoMapper;
@@ -11,13 +12,15 @@ namespace ApiWebApi.GenericRepositoris.Servises
     /// </summary>
     public class StudentiService
     {
+        private readonly ApiWebContext _context;
         private readonly GenericRepository<Studenti> _repository;
         private readonly IMapper _mapper;
 
-        public StudentiService(GenericRepository<Studenti> repository, IMapper mapper)
+        public StudentiService(GenericRepository<Studenti> repository, IMapper mapper, ApiWebContext context)
         {
             _repository = repository;
             _mapper = mapper;
+            _context = context;
         }
 
         /// <summary>
@@ -64,21 +67,19 @@ namespace ApiWebApi.GenericRepositoris.Servises
         /// </summary>
         public async Task<GetStudenteByIdDto> CreateAsync(CreateStudenteDto dto)
         {
-            try
-            {
-                // Mappo DTO → Entità
-                Studenti studente = _mapper.Map<Studenti>(dto);
+            // Controllo che il corso esista
+            var corso = await _context.Corsi.FindAsync(dto.IdCorso);
+            if (corso == null)
+                throw new Exception($"Il corso con Id {dto.IdCorso} non esiste.");
 
-                // Salvo con il repository
-                Studenti saved = await _repository.CreateAsync(studente);
+            // Mappo DTO → Entità
+            Studenti studente = _mapper.Map<Studenti>(dto);
 
-                // Ritorno DTO con Id aggiornato
-                return _mapper.Map<GetStudenteByIdDto>(saved);
-            }
-            catch (Exception)
-            {
-                throw new Exception("Errore durente la creazione!");
-            }
+            // Salvo con il repository
+            Studenti saved = await _repository.CreateAsync(studente);
+
+            // Ritorno DTO con Id aggiornato
+            return _mapper.Map<GetStudenteByIdDto>(saved);
         }
 
         /// <summary>
@@ -88,18 +89,26 @@ namespace ApiWebApi.GenericRepositoris.Servises
         {
             try
             {
-                if (await _repository.GetByIdAsync(id) == null)
-                {
-                    return null; // Studente non trovato
-                }
-                // Creo l'entità aggiornata
-                Studenti studente = _mapper.Map<Studenti>(dto);
-                studente.IdStudente = id;
+                // Recupera lo studente esistente
+                var existing = await _repository.GetByIdAsync(id);
+                if (existing == null)
+                    return null;
 
-                // Aggiorno con il repository
-                Studenti? updated = await _repository.UpdateAsync(id, studente);
+                // Controlla che il corso esista
+                var corso = await _context.Corsi.FindAsync(dto.IdCorso);
+                if (corso == null)
+                    throw new Exception($"Il corso con Id {dto.IdCorso} non esiste.");
 
-                return updated == null ? null : _mapper.Map<GetStudenteByIdDto>(updated);
+                // Aggiorna manualmente le proprietà
+                existing.Nome = dto.Nome;
+                existing.Cognome = dto.Cognome;
+                existing.Eta = dto.Eta;
+                existing.IdCorso = dto.IdCorso;
+
+                // Salva l'aggiornamento
+                var updated = await _repository.UpdateAsync(id, existing);
+
+                return _mapper.Map<GetStudenteByIdDto>(updated);
             }
             catch (Exception ex)
             {
