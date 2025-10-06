@@ -11,5 +11,10 @@ namespace ApiWebApi.Models
         [MaxLength(50)]
         public string Cognome { get; set; }
         public int Eta { get; set; } = 0;
+        public string Email { get; set; } = string.Empty;
+
+        // Relazione con corso
+        public int IdCorso { get; set; }
+        public Corsi? Corso { get; set; }
     }
 }

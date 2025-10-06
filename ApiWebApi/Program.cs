@@ -1,4 +1,6 @@
 ﻿using ApiWebApi.Data;
+using ApiWebApi.GenericRepositories.Repositories;
+using ApiWebApi.GenericRepositories.Servises;
 using ApiWebApi.GenericRepositoris.Interfaces;
 using ApiWebApi.GenericRepositoris.Repositories;
 using ApiWebApi.GenericRepositoris.Servises;
@@ -48,8 +50,10 @@ builder.Services.AddDbContext<ApiWebContext>(options =>
 // Inject Interface and Repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-// Inject Repositories
+// Repository specifico per corsi
 builder.Services.AddScoped(typeof(GenericRepository<>));
+builder.Services.AddScoped<CorsiRepository>();
+
 
 /* ================================================================================================
  * Registra il servizio StudentiService come "scoped".                                            =
@@ -58,6 +62,7 @@ builder.Services.AddScoped(typeof(GenericRepository<>));
  * il container creerà un'istanza e la manterrà per tutta la durata della singola richiesta HTTP. =
  * Non serve passare l'interfaccia se la classe non ne implementa una: usi direttamente la classe.*/
 builder.Services.AddScoped<StudentiService>();
+builder.Services.AddScoped<CorsiService>(); // se fai anche il service per corsi
 
 /* =================================================================================================* 
  *   AutoMapper Configuration                                                                      *
