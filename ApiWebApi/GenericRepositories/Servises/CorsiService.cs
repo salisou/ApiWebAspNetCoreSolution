@@ -13,6 +13,7 @@ namespace ApiWebApi.GenericRepositories.Servises
     /// </summary>
     public class CorsiService
     {
+
         private readonly GenericRepository<Corsi> _repository;
         private readonly CorsiRepository _corsi;
         private readonly IMapper _mapper;
@@ -22,11 +23,12 @@ namespace ApiWebApi.GenericRepositories.Servises
         /// </summary>
         /// <param name="repository">Repository per l'entità Corsi</param>
         /// <param name="mapper">AutoMapper per mappature DTO ↔ Entità</param>
-        public CorsiService(GenericRepository<Corsi> repository, IMapper mapper, CorsiRepository corsi)
+
+        public CorsiService(GenericRepository<Corsi> repository, CorsiRepository corsi, IMapper mapper)
         {
             _repository = repository;
-            _mapper = mapper;
             _corsi = corsi;
+            _mapper = mapper;
         }
 
         /// <summary>

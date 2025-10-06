@@ -68,7 +68,7 @@ namespace ApiWebApi.GenericRepositoris.Servises
         public async Task<GetStudenteByIdDto> CreateAsync(CreateStudenteDto dto)
         {
             // Controllo che il corso esista
-            var corso = await _context.Corsi.FindAsync(dto.IdCorso);
+            Corsi? corso = await _context.Corsi.FindAsync(dto.IdCorso);
             if (corso == null)
                 throw new Exception($"Il corso con Id {dto.IdCorso} non esiste.");
 
