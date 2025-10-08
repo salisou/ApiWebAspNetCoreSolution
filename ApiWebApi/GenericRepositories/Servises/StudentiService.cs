@@ -106,7 +106,7 @@ namespace ApiWebApi.GenericRepositoris.Servises
                 existing.IdCorso = dto.IdCorso;
 
                 // Salva l'aggiornamento
-                var updated = await _repository.UpdateAsync(id, existing);
+                Studenti? updated = await _repository.UpdateAsync(id, existing);
 
                 return _mapper.Map<GetStudenteByIdDto>(updated);
             }
