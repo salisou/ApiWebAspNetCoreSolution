@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiWebApi.Controllers
 {
-    [Route("api/v1/studenti")]
+    [Route("api/Studenti")]
     [ApiController]
     public class StudentiController : ControllerBase
     {
@@ -19,12 +19,12 @@ namespace ApiWebApi.Controllers
         /// <summary>
         /// Restituisce la lista di tutti gli studenti
         /// </summary>
-        [HttpGet("all")]
+        [HttpGet("List")]
         public async Task<IActionResult> GetAll()
         {
             try
             {
-                var studenti = await _service.GetAllAsync();
+                IEnumerable<GetAllStudenteDto> studenti = await _service.GetAllAsync();
                 return Ok(ApiResponseFactory.Success(studenti, "Lista studenti recuperata con successo"));
             }
             catch (Exception ex)
@@ -37,12 +37,12 @@ namespace ApiWebApi.Controllers
         /// <summary>
         /// Restituisce uno studente per ID
         /// </summary>
-        [HttpGet("{id}")]
+        [HttpGet("GetById{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                var studente = await _service.GetByIdAsync(id);
+                GetStudenteByIdDto? studente = await _service.GetByIdAsync(id);
                 if (studente == null)
                     return NotFound(ApiResponseFactory.Fail<GetStudenteByIdDto>($"Studente con id {id} non trovato"));
 
@@ -58,12 +58,12 @@ namespace ApiWebApi.Controllers
         /// <summary>
         /// Crea un nuovo studente
         /// </summary>
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CreateStudenteDto dto)
         {
             try
             {
-                var created = await _service.CreateAsync(dto);
+                GetStudenteByIdDto created = await _service.CreateAsync(dto);
                 return CreatedAtAction(nameof(GetById),
                     new { id = created.IdStudente },
                     ApiResponseFactory.Success(created, "Studente creato con successo"));
@@ -77,12 +77,12 @@ namespace ApiWebApi.Controllers
         /// <summary>
         /// Aggiorna uno studente esistente
         /// </summary>
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateStudenteDto dto)
         {
             try
             {
-                var updated = await _service.UpdateAsync(id, dto);
+                GetStudenteByIdDto? updated = await _service.UpdateAsync(id, dto);
                 if (updated == null)
                     return NotFound(ApiResponseFactory.Fail<GetStudenteByIdDto>($"Studente con id {id} non trovato"));
 
@@ -97,12 +97,12 @@ namespace ApiWebApi.Controllers
         /// <summary>
         /// Elimina uno studente
         /// </summary>
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var success = await _service.DeleteAsync(id);
+                bool success = await _service.DeleteAsync(id);
                 if (!success)
                     return NotFound(ApiResponseFactory.Fail<string>($"Studente con id {id} non trovato"));
 
