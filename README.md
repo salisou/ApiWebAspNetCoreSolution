@@ -9,6 +9,27 @@ L'esercizio è suddiviso in due parti principali: **Frontend** e **Backend**, co
 
 ____________________________________________________________________________________________________________
 
+## Tecnologie
+- ASP.NET Core Web API
+- SQLite
+- Repository Pattern
+- DTO
+- Swagger
+
+## Struttura
+- Entities
+- DTOs
+- Data
+- Repositories
+- Services
+- Controllers
+
+## Avvio
+1. `dotnet restore`
+2. `dotnet ef migrations add InitialCreate`
+3. `dotnet ef database update`
+4. `dotnet run`
+
 ## Comandi Git - Guida Completa
     git clone
     Clona un repository remoto nella tua macchina locale.
