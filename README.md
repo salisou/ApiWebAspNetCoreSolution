@@ -35,9 +35,11 @@ ________________________________________________________________________________
 -  Mappings
 -  Wrappers
 
-## Avvio
-1. `dotnet restore`
-2. `dotnet ef migrations add InitialCreate`
-3. `dotnet ef database update`
-4. `dotnet run`
+## Avvio del Api
+1. `cd ApiWebApi` 
+2. `dotnet restore`
+3. `dotnet build`
+4. `dotnet ef migrations add InitialCreate`
+5. `dotnet ef database update`
+6. `dotnet run`
 
