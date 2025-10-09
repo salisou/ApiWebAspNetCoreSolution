@@ -18,7 +18,7 @@ ________________________________________________________________________________
 - DTO
 - Swagger
 
-## Struttura
+## Struttura del Api
 - Models
     - Studenti 
     - Corsi 
