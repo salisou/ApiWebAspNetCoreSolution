@@ -13,8 +13,9 @@ namespace Scuola.Desktop
             ApplicationConfiguration.Initialize();
 
             // definizione della pagina principale
-            LoginPage loginForm = new LoginPage();
-            Application.Run(loginForm);
+            //LoginPage loginForm = new LoginPage();
+            HomePage homeForm = new();
+            Application.Run(homeForm);
         }
     }
 }
