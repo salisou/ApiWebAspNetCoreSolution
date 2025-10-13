@@ -39,6 +39,10 @@
             button2 = new Button();
             button1 = new Button();
             panel2 = new Panel();
+            panel5 = new Panel();
+            lblNome = new Label();
+            pictureBox1 = new PictureBox();
+            analogClock1 = new AnalogClock.AnalogClock();
             panel4 = new Panel();
             lblGiurni = new Label();
             lblDD = new Label();
@@ -46,13 +50,14 @@
             lblYYYY = new Label();
             panel3 = new Panel();
             btnBackground = new Button();
-            analogClock1 = new AnalogClock.AnalogClock();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picMonitoraggio).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picCorsi).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picDashboard).BeginInit();
             panel2.SuspendLayout();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -76,6 +81,7 @@
             // 
             // picMonitoraggio
             // 
+            picMonitoraggio.Cursor = Cursors.Help;
             picMonitoraggio.Image = (Image)resources.GetObject("picMonitoraggio.Image");
             picMonitoraggio.Location = new Point(263, 7);
             picMonitoraggio.Name = "picMonitoraggio";
@@ -87,6 +93,7 @@
             // 
             // picCorsi
             // 
+            picCorsi.Cursor = Cursors.Hand;
             picCorsi.Image = (Image)resources.GetObject("picCorsi.Image");
             picCorsi.Location = new Point(179, 6);
             picCorsi.Name = "picCorsi";
@@ -98,6 +105,7 @@
             // 
             // picData
             // 
+            picData.Cursor = Cursors.Hand;
             picData.Image = (Image)resources.GetObject("picData.Image");
             picData.Location = new Point(95, 7);
             picData.Name = "picData";
@@ -109,6 +117,7 @@
             // 
             // picDashboard
             // 
+            picDashboard.Cursor = Cursors.Hand;
             picDashboard.Image = (Image)resources.GetObject("picDashboard.Image");
             picDashboard.Location = new Point(11, 7);
             picDashboard.Name = "picDashboard";
@@ -169,6 +178,7 @@
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
+            panel2.Controls.Add(panel5);
             panel2.Controls.Add(analogClock1);
             panel2.Controls.Add(panel4);
             panel2.Dock = DockStyle.Left;
@@ -176,6 +186,68 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(180, 768);
             panel2.TabIndex = 1;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(lblNome);
+            panel5.Controls.Add(pictureBox1);
+            panel5.Location = new Point(3, 403);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(175, 181);
+            panel5.TabIndex = 2;
+            // 
+            // lblNome
+            // 
+            lblNome.ForeColor = Color.Black;
+            lblNome.Location = new Point(0, 136);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(179, 45);
+            lblNome.TabIndex = 1;
+            lblNome.Text = "Nome ";
+            lblNome.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(-3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(180, 122);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // analogClock1
+            // 
+            analogClock1.DrawHourHand = true;
+            analogClock1.DrawHourHandShadow = true;
+            analogClock1.DrawMinuteHand = true;
+            analogClock1.DrawMinuteHandShadow = true;
+            analogClock1.DrawSecondHand = true;
+            analogClock1.DropShadowColor = Color.Black;
+            analogClock1.DropShadowOffset = new Point(0, 0);
+            analogClock1.FaceColorHigh = Color.RoyalBlue;
+            analogClock1.FaceColorLow = Color.SkyBlue;
+            analogClock1.FaceGradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
+            analogClock1.FaceImage = null;
+            analogClock1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            analogClock1.HourHandColor = Color.Gainsboro;
+            analogClock1.HourHandDropShadowColor = Color.Gray;
+            analogClock1.Location = new Point(3, 3);
+            analogClock1.MinuteHandColor = Color.WhiteSmoke;
+            analogClock1.MinuteHandDropShadowColor = Color.Gray;
+            analogClock1.MinuteHandTickStyle = AnalogClock.TickStyle.Normal;
+            analogClock1.Name = "analogClock1";
+            analogClock1.NumeralColor = Color.WhiteSmoke;
+            analogClock1.RimColorHigh = Color.RoyalBlue;
+            analogClock1.RimColorLow = Color.SkyBlue;
+            analogClock1.RimGradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
+            analogClock1.SecondHandColor = Color.Tomato;
+            analogClock1.SecondHandDropShadowColor = Color.Gray;
+            analogClock1.SecondHandEndCap = System.Drawing.Drawing2D.LineCap.Round;
+            analogClock1.SecondHandTickStyle = AnalogClock.TickStyle.Normal;
+            analogClock1.Size = new Size(176, 176);
+            analogClock1.TabIndex = 1;
+            analogClock1.Time = new DateTime(0L);
             // 
             // panel4
             // 
@@ -262,39 +334,6 @@
             btnBackground.UseVisualStyleBackColor = false;
             btnBackground.Click += btnBackground_Click;
             // 
-            // analogClock1
-            // 
-            analogClock1.DrawHourHand = true;
-            analogClock1.DrawHourHandShadow = true;
-            analogClock1.DrawMinuteHand = true;
-            analogClock1.DrawMinuteHandShadow = true;
-            analogClock1.DrawSecondHand = true;
-            analogClock1.DropShadowColor = Color.Black;
-            analogClock1.DropShadowOffset = new Point(0, 0);
-            analogClock1.FaceColorHigh = Color.RoyalBlue;
-            analogClock1.FaceColorLow = Color.SkyBlue;
-            analogClock1.FaceGradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-            analogClock1.FaceImage = null;
-            analogClock1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            analogClock1.HourHandColor = Color.Gainsboro;
-            analogClock1.HourHandDropShadowColor = Color.Gray;
-            analogClock1.Location = new Point(3, 3);
-            analogClock1.MinuteHandColor = Color.WhiteSmoke;
-            analogClock1.MinuteHandDropShadowColor = Color.Gray;
-            analogClock1.MinuteHandTickStyle = AnalogClock.TickStyle.Normal;
-            analogClock1.Name = "analogClock1";
-            analogClock1.NumeralColor = Color.WhiteSmoke;
-            analogClock1.RimColorHigh = Color.RoyalBlue;
-            analogClock1.RimColorLow = Color.SkyBlue;
-            analogClock1.RimGradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
-            analogClock1.SecondHandColor = Color.Tomato;
-            analogClock1.SecondHandDropShadowColor = Color.Gray;
-            analogClock1.SecondHandEndCap = System.Drawing.Drawing2D.LineCap.Round;
-            analogClock1.SecondHandTickStyle = AnalogClock.TickStyle.Normal;
-            analogClock1.Size = new Size(176, 176);
-            analogClock1.TabIndex = 1;
-            analogClock1.Time = new DateTime(0L);
-            // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -321,6 +360,8 @@
             ((System.ComponentModel.ISupportInitialize)picData).EndInit();
             ((System.ComponentModel.ISupportInitialize)picDashboard).EndInit();
             panel2.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
@@ -347,5 +388,8 @@
         private Label lblGiurni;
         private Label lblDD;
         private AnalogClock.AnalogClock analogClock1;
+        private Panel panel5;
+        private Label lblNome;
+        private PictureBox pictureBox1;
     }
 }
