@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Scuola.Desktop.Helpers;
 
 namespace Scuola.Desktop
 {
@@ -20,6 +12,42 @@ namespace Scuola.Desktop
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+        private void btnClose_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMini_Click(object sender, EventArgs e)
+        {
+
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void picDashboard_Click(object sender, EventArgs e)
+        {
+            AlertManager.ShowAlert("Cliccato su Dashboard", "info");
+        }
+
+        private void picData_Click(object sender, EventArgs e)
+        {
+            AlertManager.ShowAlert("Funzionalità del Data Lake non ancora implementata", "warning");
+        }
+
+        private void picCorsi_Click(object sender, EventArgs e)
+        {
+            AlertManager.ShowAlert("Funzionalità dei Corsi non ancora implementata", "warning");
+        }
+
+        private void picMonitoraggio_Click(object sender, EventArgs e)
+        {
+            AlertManager.ShowAlert("Funzionalità del Monitoraggio non ancora implementata", "warning");
+        }
+
+        private void btnBackground_Click(object sender, EventArgs e)
+        {
+            // Messaggio di warning
+            AlertManager.ShowAlert("Funzionalità del Cambia Sfondo non ancora implementata", "warning");
         }
     }
 }
