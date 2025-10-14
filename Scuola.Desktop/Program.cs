@@ -1,3 +1,5 @@
+using Scuola.Desktop.EsempiForms;
+
 namespace Scuola.Desktop
 {
     internal static class Program
@@ -14,8 +16,10 @@ namespace Scuola.Desktop
 
             // definizione della pagina principale
             //LoginPage loginForm = new LoginPage();
-            HomePage homeForm = new();
-            Application.Run(homeForm);
+            //HomePage homeForm = new();
+            //ListaBox listBoxForm = new();
+            ProgressBarControlEsempio finestra = new();
+            Application.Run(finestra);
         }
     }
 }

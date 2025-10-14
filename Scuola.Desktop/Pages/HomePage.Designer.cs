@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePage));
             panel1 = new Panel();
             picMonitoraggio = new PictureBox();
@@ -50,6 +51,7 @@
             lblYYYY = new Label();
             panel3 = new Panel();
             btnBackground = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picMonitoraggio).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picCorsi).BeginInit();
@@ -391,5 +393,6 @@
         private Panel panel5;
         private Label lblNome;
         private PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
